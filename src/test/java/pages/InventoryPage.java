@@ -13,8 +13,7 @@ public class InventoryPage extends BasePage {
     private static final String PATH = "/inventory.html";
 
     private static final String ADD_TO_CART = "//*[text()='%s']//ancestor::div[@class='inventory_item']//child" +
-            "::button[text()='Add to " +
-            "cart']";
+            "::button[text()='Add to cart']";
 
     private static final By PAGE_TITLE = By.className("title");
     private static final By BURGER_MENU = By.id("react-burger-menu-btn");
@@ -59,4 +58,3 @@ public class InventoryPage extends BasePage {
         return addedProducts;
     }
 }
-

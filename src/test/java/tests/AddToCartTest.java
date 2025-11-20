@@ -1,5 +1,7 @@
 package tests;
 
+import User.User;
+import User.UserFactory;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -11,25 +13,25 @@ import java.util.Objects;
 
 public class AddToCartTest extends BaseTest {
 
-    private static final String PASSWORD_FOR_ALL_USERS = "secret_sauce";
-
     @DataProvider(name = "validUsers")
     public Object[][] provideUsers() {
         return new Object[][]{
-                {"standard_user"},
-                {"locked_out_user"},
-                {"problem_user"},
-                {"performance_glitch_user"},
-                {"error_user"},
-                {"visual_user"}
+                {UserFactory.createStandardUser()},
+                {UserFactory.createLockedUser()},
+                {UserFactory.createProblemUser()},
+                {UserFactory.createPerformanceGlitchUser()},
+                {UserFactory.createErrorUser()},
+                {UserFactory.createVisualUser()}
         };
     }
 
-    @Test(priority = 1, dataProvider = "validUsers", testName = "Add all items to cart and check cart")
-    public void addAllItems_thenCheckCart(String username) {
+    @Test(priority = 1, dataProvider = "validUsers", description = "Add all items to cart and check cart")
+    public void addAllItems_thenCheckCart(User user) {
+        System.out.println("AddToCartTest are running in thread: " + Thread.currentThread().getName());
+
         openLoginPage();
 
-        InventoryPage inventoryPage = loginPage.loginAs(username, PASSWORD_FOR_ALL_USERS);
+        InventoryPage inventoryPage = loginPage.loginAs(user);
 
         Assert.assertTrue(Objects.requireNonNull(driver.getCurrentUrl()).contains("/inventory.html"), "The user is not logged in");
 

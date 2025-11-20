@@ -1,5 +1,6 @@
 package pages;
 
+import User.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -29,8 +30,15 @@ public class LoginPage extends BasePage {
         driver.findElement(LOGIN_BUTTON).click();
     }
 
-    public InventoryPage loginAs(String username, String password) {
-        enterUsername(username);
+    public InventoryPage loginAs(User user) {
+        enterUsername(user.getUserName());
+        enterPassword(user.getPassword());
+        clickLogin();
+        return new InventoryPage(driver);
+    }
+
+    public InventoryPage loginAs(String name, String password) {
+        enterUsername(name);
         enterPassword(password);
         clickLogin();
         return new InventoryPage(driver);
