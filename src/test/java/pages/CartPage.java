@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CartPage extends BasePage {
+
     private static final String PATH = "/cart.html";
 
     private static final By PAGE_TITLE = By.className("title");
     private static final By ITEM_NAME = By.className("inventory_item_name");
-
 
     public CartPage(WebDriver driver) {
         super(driver);
